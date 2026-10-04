@@ -1,1 +1,35 @@
+# Java
+*.class
+*.log
+
+# Maven
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IntelliJ
 .idea/
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Local Spring configuration
+application-local.yml
+application-local.yaml
+application-local.properties
