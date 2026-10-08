@@ -7,6 +7,7 @@ import com.microrelief.task_service.entity.Task;
 import com.microrelief.task_service.service.TaskService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -41,5 +42,13 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Long id) {
         taskService.deleteTask(id);
+    }
+    
+    @PatchMapping("/{id}/ai-analysis")
+    public Task updateAiAnalysis(@PathVariable Long id, @RequestBody Map<String, Object> analysis) {
+        return taskService.updateAiAnalysis(id,
+                (String) analysis.get("category"),
+                (Integer) analysis.get("urgencyScore"),
+                (Boolean) analysis.get("flaggedUnsafe"));
     }
 }

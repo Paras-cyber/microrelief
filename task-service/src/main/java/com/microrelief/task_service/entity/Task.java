@@ -22,6 +22,36 @@ public class Task {
     private TaskStatus status = TaskStatus.OPEN;
 
     private LocalDateTime createdAt = LocalDateTime.now();
+    
+    public String getAiCategory() {
+		return aiCategory;
+	}
+
+	public void setAiCategory(String aiCategory) {
+		this.aiCategory = aiCategory;
+	}
+
+	public Integer getUrgencyScore() {
+		return urgencyScore;
+	}
+
+	public void setUrgencyScore(Integer urgencyScore) {
+		this.urgencyScore = urgencyScore;
+	}
+
+	public Boolean getFlaggedUnsafe() {
+		return flaggedUnsafe;
+	}
+
+	public void setFlaggedUnsafe(Boolean flaggedUnsafe) {
+		this.flaggedUnsafe = flaggedUnsafe;
+	}
+
+	private String aiCategory;
+    
+    private Integer urgencyScore; // 1-5
+    
+    private Boolean flaggedUnsafe = false;
 
 	public Long getId() {
 		return id;
