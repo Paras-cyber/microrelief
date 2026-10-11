@@ -1,9 +1,19 @@
 pipeline {
     agent any
+
+    environment {
+        DB_PASSWORD  = credentials('db-password')
+        JWT_SECRET   = credentials('jwt-secret')
+        GEMINI_API_KEY = credentials('gemini-api-key')
+    }
+
     stages {
         stage('Checkout') {
-            steps { checkout scm }
+            steps {
+                checkout scm
+            }
         }
+
         stage('Build & Test') {
             steps {
                 bat 'cd discovery-server && mvnw.cmd -B clean verify'
@@ -14,15 +24,26 @@ pipeline {
                 bat 'cd api-gateway && mvnw.cmd -B clean verify'
             }
         }
+
         stage('Docker Build') {
-            steps { bat 'docker compose build' }
+            steps {
+                bat 'docker compose build'
+            }
         }
+
         stage('Deploy') {
-            steps { bat 'docker compose up -d' }
+            steps {
+                bat 'docker compose up -d'
+            }
         }
     }
+
     post {
-        success { echo 'Pipeline succeeded' }
-        failure { echo 'Pipeline failed' }
+        success {
+            echo 'Pipeline succeeded'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
     }
 }
